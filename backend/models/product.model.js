@@ -11,10 +11,19 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    product_current_price: {
+    product_price: {
       type: String,
     },
-    product_old_price: {
+    product_original_price: {
+      type: String,
+    },
+    product_star_rating: {
+      type: String,
+    },
+    product_url: {
+      type: String,
+    },
+    product_photo: {
       type: String,
     },
   },

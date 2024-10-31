@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TextInput } from "flowbite-react";
+import { Button, TextInput } from "flowbite-react";
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 
@@ -35,7 +35,7 @@ const Home = () => {
   };
 
   return (
-    <main className=" m-3 p-3 flex flex-col max-w-6xl mx-auto min-h-72">
+    <main className=" m-3 p-3 flex flex-col max-w-6xl mx-auto min-h-svh">
       <h1 className="uppercase text-3xl my-3 font-semibold text-center mt-8">
         Search a Product
       </h1>
@@ -53,11 +53,9 @@ const Home = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="p-2">
-          <button className=" rounded-lg border p-2 hover:bg-gray-200">
-            Search
-          </button>
-        </div>
+        <Button outline type="submit">
+          Search
+        </Button>
       </form>
       <section className="mt-8">
         {products.length > 0 ? (

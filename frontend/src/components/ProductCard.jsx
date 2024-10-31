@@ -9,21 +9,16 @@ const ProductCard = ({ product, handleClick }) => {
           </h2>
         </div>
         <div className="flex items-center gap-2">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-          ))}
-          <span className="text-xs text-gray-500">
-            {product.product_star_rating}
-          </span>
+          <span className="text-xl font-semibold">{product.product_price}</span>
         </div>
         <a href={`${product.product_url}`}>
-          <button className="py-2 px-4 bg-gray-200 text-black rounded-full hover:bg-gray-300 font-semibold">
+          <button className="py-2 px-4 bg-gray-200 text-black rounded-full hover:bg-gray-300 font-semibold w-2/3">
             View Product
           </button>
         </a>
         <div>
           <button
-            className="py-2 px-4 bg-blue-400 text-white rounded-full font-semibold"
+            className="py-2 px-4 w-2/3 bg-blue-400 text-white rounded-full font-semibold"
             onClick={() => handleClick(product)}
           >
             Track this product

@@ -32,11 +32,24 @@ export const searchProduct = async (req, res) => {
 };
 
 export const addProductToTrack = async (req, res) => {
+  const {
+    asin,
+    product_title,
+    product_price,
+    product_original_price,
+    product_star_rating,
+    product_url,
+    product_photo,
+  } = req.body;
+
   const trackedProduct = new Product({
-    asin: req.body.asin,
-    product_title: req.body.product_title,
-    product_current_price: req.body.product_price,
-    product_old_price: req.body.product_original_price,
+    asin,
+    product_title,
+    product_price,
+    product_original_price,
+    product_star_rating,
+    product_url,
+    product_photo,
   });
 
   try {
@@ -44,5 +57,15 @@ export const addProductToTrack = async (req, res) => {
     res.status(200).json(savedProduct);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getTrackList = async (req, res) => {
+  try {
+    const lists = await Product.find({});
+    console.log(lists);
+    res.status(200).json(lists);
+  } catch (error) {
+    res.status(500).message("error");
   }
 };
