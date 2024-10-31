@@ -6,6 +6,11 @@ const TrackList = () => {
   const [trackList, setTrackList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleClick = async (product) => {
+    console.log("remove");
+    // working on remove functionality
+  };
+
   useEffect(() => {
     const getList = async () => {
       try {
@@ -33,7 +38,8 @@ const TrackList = () => {
                 <ProductCard
                   key={index}
                   product={product}
-                  // handleClick={handleClick}
+                  handleClick={handleClick}
+                  type="remove"
                 />
               ))}
             </div>

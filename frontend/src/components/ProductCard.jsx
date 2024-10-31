@@ -1,4 +1,4 @@
-const ProductCard = ({ product, handleClick }) => {
+const ProductCard = ({ product, handleClick, type }) => {
   return (
     <div className="relative flex flex-col sm:flex-row justify-between items-stretch box-border border p-4 rounded-lg shadow-md gap-2 sm:flex-grow">
       <section className="flex-grow flex flex-col gap-4 p-2">
@@ -21,7 +21,7 @@ const ProductCard = ({ product, handleClick }) => {
             className="py-2 px-4 w-2/3 bg-blue-400 text-white rounded-full font-semibold"
             onClick={() => handleClick(product)}
           >
-            Track this product
+            {type === "add" ? "Track this product" : "Remove from track list"}
           </button>
         </div>
       </section>

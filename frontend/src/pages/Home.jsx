@@ -65,6 +65,7 @@ const Home = () => {
                 key={index}
                 product={product}
                 handleClick={handleClick}
+                type="add"
               />
             ))}
           </div>
