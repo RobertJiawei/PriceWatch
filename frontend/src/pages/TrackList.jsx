@@ -7,8 +7,14 @@ const TrackList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleClick = async (product) => {
-    console.log("remove");
-    // working on remove functionality
+    try {
+      const res = await axios.delete("/product/delete", { data: product });
+      console.log(res.data.message);
+
+      setTrackList((prev) => prev.filter((item) => item._id !== product._id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

@@ -69,3 +69,21 @@ export const getTrackList = async (req, res) => {
     res.status(500).message("error");
   }
 };
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const { _id } = req.body;
+
+    if (!_id) {
+      return res.status(400).send({ message: "Product ID is required" });
+    }
+    const deletedProduct = await Product.findByIdAndDelete(_id);
+    if (!deletedProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.status(200).send({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error("Deletion error:", error);
+    res.status(500).send({ message: "Server error" });
+  }
+};

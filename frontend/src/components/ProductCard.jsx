@@ -18,7 +18,10 @@ const ProductCard = ({ product, handleClick, type }) => {
         </a>
         <div>
           <button
-            className="py-2 px-4 w-2/3 bg-blue-400 text-white rounded-full font-semibold"
+            className={
+              "py-2 px-4 w-2/3 text-white rounded-full font-semibold " +
+              (type === "remove" ? "bg-red-400" : "bg-blue-400")
+            }
             onClick={() => handleClick(product)}
           >
             {type === "add" ? "Track this product" : "Remove from track list"}
