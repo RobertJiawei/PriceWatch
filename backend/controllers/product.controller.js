@@ -1,33 +1,32 @@
+import axios from "axios";
 import Product from "../models/product.model.js";
-import { testData } from "../testData.js";
 
 export const searchProduct = async (req, res) => {
   const { query } = req.body;
-  // const options = {
-  //   method: "GET",
-  //   url: "https://real-time-amazon-data.p.rapidapi.com/search",
-  //   params: {
-  //     query: query,
-  //     page: "1",
-  //     country: "US",
-  //     sort_by: "RELEVANCE",
-  //     product_condition: "ALL",
-  //     is_prime: "false",
-  //     deals_and_discounts: "NONE",
-  //   },
-  //   headers: {
-  //     "x-rapidapi-key": process.env.rapidapikey,
-  //     "x-rapidapi-host": "real-time-amazon-data.p.rapidapi.com",
-  //   },
-  // };
+  const options = {
+    method: "GET",
+    url: "https://real-time-amazon-data.p.rapidapi.com/search",
+    params: {
+      query: query,
+      page: "1",
+      country: "US",
+      sort_by: "RELEVANCE",
+      product_condition: "ALL",
+      is_prime: "false",
+      deals_and_discounts: "NONE",
+    },
+    headers: {
+      "x-rapidapi-key": process.env.rapidapikey,
+      "x-rapidapi-host": "real-time-amazon-data.p.rapidapi.com",
+    },
+  };
   try {
-    // const response = await axios.request(options);
-    // const data = testData.data?.data?.products;
-    const data = testData.data.products;
-    res.status(200).json(data);
+    const response = await axios.request(options);
+    const products = response.data.data.products;
+    res.status(200).json(products);
   } catch (error) {
     console.error("Error fetching data:", error.message || error);
-    res.status(500).send("error");
+    res.status(500).send({ message: "Failed to fetch products from API" });
   }
 };
 
@@ -54,19 +53,20 @@ export const addProductToTrack = async (req, res) => {
 
   try {
     const savedProduct = await trackedProduct.save();
-    res.status(200).json(savedProduct);
+    res.status(201).json(savedProduct);
   } catch (error) {
-    console.log(error);
+    console.error("Error saving product:", error);
+    res.status(500).send({ message: "Failed to save product" });
   }
 };
 
 export const getTrackList = async (req, res) => {
   try {
     const lists = await Product.find({});
-    console.log(lists);
     res.status(200).json(lists);
   } catch (error) {
-    res.status(500).message("error");
+    console.error("Error fetching track list:", error);
+    res.status(500).send({ message: "Failed to retrieve track list" });
   }
 };
 
