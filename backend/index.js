@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import productRoutes from "./routes/product.route.js";
+import { checkPriceChange } from "./utility/priceCheck.js";
 
 dotenv.config({ path: "../.env" });
 const app = express();
@@ -18,6 +19,7 @@ mongoose
     console.log("App connected to database");
     app.listen(process.env.PORT, () => {
       console.log(`App is listening on port ${process.env.PORT}`);
+      checkPriceChange();
     });
   })
   .catch((error) => {

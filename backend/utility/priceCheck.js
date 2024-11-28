@@ -1,22 +1,31 @@
 import Product from "../models/product.model.js";
-import { sendEmail } from "./emailService.js";
+import NotificationService from "./notificationService.js";
 
 const parsePrice = (priceString) => parseFloat(priceString.replace("$", ""));
-const price = "$1000.00";
 
 export const checkPriceChange = async () => {
   const products = await Product.find({});
   for (const product of products) {
     const currentPrice = parsePrice(product.product_price);
-    const newPrice = parsePrice(price);
+    const newPrice = parsePrice("$10.00");
 
     if (currentPrice !== newPrice) {
       product.product_price = `$${newPrice.toFixed(2)}`;
       await product.save();
 
-      await sendEmail("rafael.beahan46@ethereal.email ", product);
+      // Send email notification
+      NotificationService.sendNotification("email", {
+        email: "rafael.beahan46@ethereal.email",
+        product,
+      });
+
+      NotificationService.sendNotification("web", {
+        message: `Price dropped for ${
+          product.product_title
+        } to $${newPrice.toFixed(2)}`,
+      });
     } else {
-      console.log("price no change");
+      console.log("Price no change for", product.product_title);
     }
   }
 };
