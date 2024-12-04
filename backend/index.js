@@ -23,6 +23,7 @@ mongoose
     app.listen(process.env.PORT, () => {
       console.log(`App is listening on port ${process.env.PORT}`);
       checkPriceChange();
+      setInterval(checkPriceChange, 10000);
     });
   })
   .catch((error) => {
